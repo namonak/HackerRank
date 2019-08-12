@@ -17,23 +17,23 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	// Declare second integer, double, and String variables.
-	var i2 uint64
-	var d2 float64
-	var s2 string
+	var inputUint64 uint64
+	var inputFloat64 float64
+	var inputString string
 
 	// Read and save an integer, double, and String to your variables.
-	fmt.Scan(&i2)
-	fmt.Scan(&d2)
+	fmt.Scan(&inputUint64)
+	fmt.Scan(&inputFloat64)
 	scanner.Scan()
-	s2 = scanner.Text()
+	inputString = scanner.Text()
 
 	// Print the sum of both integer variables on a new line.
-	fmt.Println(i + i2)
+	fmt.Println(i + inputUint64)
 
 	// Print the sum of the double variables on a new line.
-	fmt.Printf("%.1f\n", d+d2)
+	fmt.Printf("%.1f\n", d+inputFloat64)
 
 	// Concatenate and print the String variables on a new line
 	// The 's' variable above should be printed first.
-	fmt.Printf("%s%s", s, s2)
+	fmt.Printf("%s%s", s, inputString)
 }
