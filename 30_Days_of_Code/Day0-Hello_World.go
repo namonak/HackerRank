@@ -11,7 +11,7 @@ func main() {
 	in := bufio.NewReader(os.Stdin)
 	line, err := in.ReadString('\n')
 	if err != nil {
-		// exception
+		log.Fatalf("%v", err)
 	}
 	fmt.Println("Hello, World.")
 	fmt.Println(line)
