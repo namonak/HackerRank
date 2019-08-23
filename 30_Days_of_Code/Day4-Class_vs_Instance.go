@@ -35,11 +35,11 @@ func (p person) yearPasses() person {
 }
 
 func main() {
-	var T, age int
+	var testcast, age int
 
-	fmt.Scan(&T)
+	fmt.Scan(&testcast)
 
-	for i := 0; i < T; i++ {
+	for i := 0; i < testcase; i++ {
 		fmt.Scan(&age)
 		p := person{age: age}
 		p = p.NewPerson(age)
