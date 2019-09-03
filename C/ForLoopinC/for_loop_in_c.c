@@ -9,9 +9,9 @@ void convertDigitToEnglish(int digit) {
 void isEvenOdd(int digit) {
     if (digit % 2 == 0) {
         printf("even\n");
-    } else {
-        printf("odd\n");
+        return;
     }
+    printf("odd\n");
 }
 
 int main() 
