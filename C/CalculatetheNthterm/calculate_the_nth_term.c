@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 //Complete the following function.
 
 int find_nth_term(int n, int a, int b, int c)
