@@ -30,5 +30,9 @@ int main()
         printPattern(n, i);
     }
 
+    for (int j = 2; j <= n; j++) {
+        printPattern(n, j);
+    }
+
     return 0;
 }
