@@ -13,5 +13,13 @@ public class Solution {
             pair_left[i] = s.next();
             pair_right[i] = s.next();
         }
+
+        s.close();
+
+        HashSet<String> set = new HashSet<>(5);
+        for (int i = 0; i < t; i++) {
+            set.add(pair_left[i] + " " + pair_right[i]);
+            System.out.println(set.size());
+        }
     }
 }
