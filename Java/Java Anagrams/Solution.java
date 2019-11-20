@@ -7,15 +7,13 @@ public class Solution {
         // Complete the function
         a = a.toLowerCase();
         b = b.toLowerCase();
-        
-        char[] c = a.toCharArray();
-        Arrays.sort(c);
-        char[] d = b.toCharArray();
-        Arrays.sort(d);
-        String A = new String(c);
-        String B = new String(d);
 
-        if (A.equals(B)) {
+        char[] c = a.toCharArray();
+        char[] d = b.toCharArray();
+        Arrays.sort(c);
+        Arrays.sort(d);
+
+        if (Arrays.equals(c, d)) {
             return true;
         }
         return false;
