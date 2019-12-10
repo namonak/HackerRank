@@ -13,13 +13,9 @@ class Singleton {
     private Singleton() {
     }
 
-    static Singleton getSingleInstance() {
+    static synchronized Singleton getSingleInstance() {
         if (instance == null) {
-            synchronized (Singleton.class) {
-                if (instance == null) {
-                    instance = new Singleton();
-                }
-            }
+            instance = new Singleton();
         }
         return instance;
     }
