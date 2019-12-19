@@ -13,13 +13,10 @@ int main() {
 
     scanf("%s", inputArr);
 
-    while(i < MAX_INPUT_LENGTH) {        
-        if(inputArr[i] >= ASCII_CODE_ZERO && inputArr[i] <= ASCII_CODE_NINE) {
+    for (i = 0; i < MAX_INPUT_LENGTH && inputArr[i] != '\0'; ++i) {
+        if (inputArr[i] >= ASCII_CODE_ZERO && inputArr[i] <= ASCII_CODE_NINE) {
             outputArr[inputArr[i] - ASCII_CODE_ZERO]++;
-        } else if(inputArr[i] == '\0') {
-            break;
         }
-        i++;
     }
 
     i = 0;
