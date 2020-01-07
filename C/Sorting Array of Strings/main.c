@@ -3,11 +3,11 @@
 #include <string.h>
 
 int lexicographic_sort(const char* a, const char* b) {
-
+	return strcmp(a, b);
 }
 
 int lexicographic_sort_reverse(const char* a, const char* b) {
-
+	return strcmp(b, a);
 }
 
 int sort_by_number_of_distinct_characters(const char* a, const char* b) {
