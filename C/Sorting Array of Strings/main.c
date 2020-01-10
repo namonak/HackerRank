@@ -11,11 +11,13 @@ int lexicographic_sort_reverse(const char* a, const char* b) {
 }
 
 int sort_by_number_of_distinct_characters(const char* a, const char* b) {
-
+    int res = get_count(a) - get_count(b);
+    return res == 0 ? lexicographic_sort(a, b) : res;
 }
 
 int sort_by_length(const char* a, const char* b) {
-
+    int res = strlen(a) - strlen(b);
+    return res == 0 ? lexicographic_sort(a, b) : res;
 }
 
 void string_sort(char** arr,const int len,int (*cmp_func)(const char* a, const char* b)){
