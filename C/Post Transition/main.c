@@ -32,9 +32,16 @@ typedef struct town town;
 
 
 void print_all_packages(town t) {
+    printf("%s:\n", t.name);
+    for(int i = 0; i < t.offices_count; i ++) {
+        printf("\t%d:\n", i);
+        for(int j = 0; j < t.offices[i].packages_count; j ++) {
+            printf("\t\t%s\n", t.offices[i].packages[j].id);
+        }
+    }
 }
 
-void send_all_acceptable_packages(town* source, int source_office_index, town* target, int target_office_index) {   
+void send_all_acceptable_packages(town* source, int source_office_index, town* target, int target_office_index) {
 }
 
 town town_with_most_packages(town* towns, int towns_count) {
@@ -93,5 +100,3 @@ int main()
     }
     return 0;
 }
-
-
