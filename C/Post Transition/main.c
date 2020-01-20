@@ -42,6 +42,24 @@ void print_all_packages(town t) {
 }
 
 void send_all_acceptable_packages(town* source, int source_office_index, town* target, int target_office_index) {
+    int min = target -> offices[target_office_index].min_weight;
+    int max = target -> offices[target_office_index].max_weight;
+
+    for(int i = 0; i < source -> offices[source_office_index].packages_count ; i ++) {
+        int weight = source -> offices[source_office_index].packages[i].weight;
+        if(weight >= min && weight <= max) {
+            target -> offices[target_office_index].packages = realloc(target -> offices[target_office_index].packages, (target -> offices[target_office_index].packages_count + 1) * sizeof(package));
+            target -> offices[target_office_index].packages[target -> offices[target_office_index].packages_count] = source -> offices[source_office_index].packages[i];
+            (target -> offices[target_office_index].packages_count)++;
+
+            for(int j = i; j < source -> offices[source_office_index].packages_count - 1; j ++) {
+                source -> offices[source_office_index].packages[j] = source -> offices[source_office_index].packages[j+1];
+            }
+            source -> offices[source_office_index].packages = realloc(source -> offices[source_office_index].packages, (source -> offices[source_office_index].packages_count - 1)* sizeof(package));
+            source -> offices[source_office_index].packages_count --;
+            i--;
+        }
+    }
 }
 
 town town_with_most_packages(town* towns, int towns_count) {
