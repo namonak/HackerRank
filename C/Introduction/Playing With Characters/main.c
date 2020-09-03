@@ -3,15 +3,12 @@
 #include <math.h>
 #include <stdlib.h>
 
-#define MAX_LEN 16
-
 int main() 
 {
-
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
     char ch;
-    char s[MAX_LEN];
-    char sen[MAX_LEN];
+    char s[16];
+    char sen[16];
 
     scanf("%c", &ch);
     scanf("%s\n", s);

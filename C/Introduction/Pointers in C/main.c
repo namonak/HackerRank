@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 void update(int *a,int *b) {
-    Complete this function    
-        int _a = (*a) + (*b);
+    // Complete this function
+    int _a = (*a) + (*b);
     int _b = (*a) > (*b) ? (*a) - (*b) : (*b) - (*a);
 
     (*a) = _a;
