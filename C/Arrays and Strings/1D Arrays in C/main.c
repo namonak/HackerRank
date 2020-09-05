@@ -3,12 +3,12 @@
 #include <math.h>
 #include <stdlib.h>
 
-int main() {    
+int main() {
     int count = 0;
     int *arr = NULL;
-    int sum = 0;    
+    int sum = 0;
 
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     scanf("%d", &count);
     if (count <= 0 || count > 1000) {
         return -1;

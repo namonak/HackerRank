@@ -9,22 +9,19 @@ int main() {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     char inputArr[MAX_INPUT_LENGTH] = {'\0', };
     int outputArr[MAX_OUTPUT_LENGTH] = {0, };
-    int i = 0;
 
     scanf("%s", inputArr);
 
-    for (i = 0; i < MAX_INPUT_LENGTH && inputArr[i] != '\0'; ++i) {
+    for (int i = 0; i < MAX_INPUT_LENGTH && inputArr[i] != '\0'; i++) {
         if (inputArr[i] >= ASCII_CODE_ZERO && inputArr[i] <= ASCII_CODE_NINE) {
-            outputArr[inputArr[i] - ASCII_CODE_ZERO]++;
+            outputArr[ inputArr[i] - ASCII_CODE_ZERO ]++;
         }
     }
 
-    i = 0;
-
-    while(i < MAX_OUTPUT_LENGTH) {
+    for (int i =0; i < MAX_OUTPUT_LENGTH; i++) {
         printf("%d ", outputArr[i]);
-        i++;
     }
+    printf("\n");
 
     return 0;
 }
