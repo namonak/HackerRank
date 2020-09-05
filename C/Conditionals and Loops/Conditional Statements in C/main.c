@@ -4,20 +4,24 @@
 #include <stdbool.h>
 
 char* readline();
-void convertDigitToString(int digit);
 
 int main()
 {
     char* n_endptr;
     char* n_str = readline();
     int n = strtol(n_str, &n_endptr, 10);
+    char numberArr[10][15] = {"Greater than 9", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 
     if (n_endptr == n_str || *n_endptr != '\0') { 
         exit(EXIT_FAILURE);
     }
 
     // Write Your Code Here
-    convertDigitToString(n);
+    if (n > 9) {
+        n = 0;
+    }
+
+    printf("%s\n", numberArr[n]);
 
     return 0;
 }
@@ -60,12 +64,3 @@ char* readline() {
     return data;
 }
 
-void convertDigitToString(int digit) {
-    char numberArr[10][15] = {"Greater than 9", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-
-    if (digit > 9) {
-        digit = 0;
-    }
-
-    printf("%s\n", numberArr[digit]);
-}

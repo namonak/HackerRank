@@ -24,7 +24,7 @@ int main()
 {
     int n;
     scanf("%d", &n);
-  	// Complete the code to print the pattern.
+    // Complete the code to print the pattern.
 
     for (int i = n; i >= 1; i--) {
         printPattern(n, i);
