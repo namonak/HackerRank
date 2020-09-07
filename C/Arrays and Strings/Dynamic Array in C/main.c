@@ -25,19 +25,15 @@ int main()
         printf("Memory allocation failed.\n");
         return -1;
     }
-    for (int i = 0; i< total_number_of_shelves; i++) {
-        *(total_number_of_pages + i) = (int*)malloc(sizeof(int));
-        if ( *(total_number_of_pages + i) == NULL ) {
-            printf("Memory allocation failed.\n");
-            return -1;
-        }
-    }
+
     total_number_of_books = (int*)malloc(sizeof(int) * total_number_of_shelves);
     if (total_number_of_books == NULL) {
         printf("Memory allocation failed.\n");
         return -1;
     }
-    memset(total_number_of_books, 0x00, sizeof(int) * total_number_of_shelves);
+    for (int i = 0; i < total_number_of_shelves; i++) {
+        *(total_number_of_books + i) = 0;
+    }
 
     while (total_number_of_queries--) {
         int type_of_query;
@@ -50,7 +46,9 @@ int main()
             int x, y;
             scanf("%d %d", &x, &y);
 
-            *(*(total_number_of_pages + x)) = y;
+            int index_of_book = *(total_number_of_books + x);
+            *(total_number_of_pages + x) = realloc(*(total_number_of_pages + x), sizeof(int) * index_of_book + 1);
+            *(*(total_number_of_pages + x) + index_of_book) = y;
             (*(total_number_of_books + x))++;
         } else if (type_of_query == 2) {
             int x, y;
