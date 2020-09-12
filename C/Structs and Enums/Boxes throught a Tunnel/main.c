@@ -4,9 +4,9 @@
 
 struct box
 {
-	/**
-	* Define three fields of type int: length, width and height
-	*/
+    /**
+     * Define three fields of type int: length, width and height
+     */
     int length;
     int width;
     int height;
@@ -15,16 +15,16 @@ struct box
 typedef struct box box;
 
 int get_volume(box b) {
-	/**
-	* Return the volume of the box
-	*/
+    /**
+     * Return the volume of the box
+     */
     return (b.length * b.width * b.height);
 }
 
 int is_lower_than_max_height(box b) {
-	/**
-	* Return 1 if the box's height is lower than MAX_HEIGHT and 0 otherwise
-	*/
+    /**
+     * Return 1 if the box's height is lower than MAX_HEIGHT and 0 otherwise
+     */
     if (b.height < MAX_HEIGHT) {
         return 1;
     } else {
@@ -34,20 +34,20 @@ int is_lower_than_max_height(box b) {
 
 int main()
 {
-	int n;
+    int n;
 
-	scanf("%d", &n);
-	box *boxes = malloc(n * sizeof(box));
+    scanf("%d", &n);
+    box *boxes = malloc(n * sizeof(box));
 
-	for (int i = 0; i < n; i++) {
-		scanf("%d%d%d", &boxes[i].length, &boxes[i].width, &boxes[i].height);
-	}
+    for (int i = 0; i < n; i++) {
+        scanf("%d%d%d", &boxes[i].length, &boxes[i].width, &boxes[i].height);
+    }
 
-	for (int i = 0; i < n; i++) {
-		if (is_lower_than_max_height(boxes[i])) {
-			printf("%d\n", get_volume(boxes[i]));
-		}
-	}
+    for (int i = 0; i < n; i++) {
+        if (is_lower_than_max_height(boxes[i])) {
+            printf("%d\n", get_volume(boxes[i]));
+        }
+    }
 
-	return 0;
+    return 0;
 }
