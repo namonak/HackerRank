@@ -24,7 +24,36 @@ struct document {
     int paragraph_count;//denotes number of paragraphs in a document
 };
 struct document get_document(char* text) {
+    struct word w;
+    struct sentence sen;
+    struct paragraph para;
+    struct document doc;
 
+    sen.word_count = 0;
+    para.sentence_count = 0;
+    doc.paragraph_count = 0;
+
+    for(int i = 0; i <= strlen(text); i++) {
+        if ( *(text + i) == ' ') {
+            sen.word_count++;
+        } else if ( *(text + i) == '.') {
+            para.sentence_count++;
+            sen.word_count++;
+        } else if ( *(text + i) == '\n' || strlen(text) == i ) {
+            doc.paragraph_count++;
+        }
+    }
+
+    printf("after Doc.paragraph_count : %d\n", doc.paragraph_count);
+    printf("after para.sentence_count : %d\n", para.sentence_count);
+    printf("after sen.word_count : %d\n", sen.word_count);
+
+    for(int i = 0; i <= strlen(text); i++) {
+        printf("%c", *(text + i));
+    }
+    printf("\n");
+
+    return doc;
 }
 
 struct word kth_word_in_mth_sentence_of_nth_paragraph(struct document Doc, int k, int m, int n) {
