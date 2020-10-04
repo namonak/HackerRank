@@ -29,29 +29,51 @@ struct document get_document(char* text) {
     struct paragraph para;
     struct document doc;
 
+    int wordIdx = 0;
+    int wordLength = 1;
+
+    w.data = (char*)malloc(sizeof(char) * wordLength);
+    sen.data = malloc(sizeof(struct word));
+
     sen.word_count = 0;
     para.sentence_count = 0;
     doc.paragraph_count = 0;
 
-    for(int i = 0; i <= strlen(text); i++) {
-        if ( *(text + i) == ' ') {
+    for (int i = 0; i <= strlen(text); i++) {
+        if( *(text + i) == ' ' || *(text + i) == '.' ) {
+            w.data = (char*)realloc(w.data, sizeof(char) * wordLength);
+            w.data[wordIdx] = '\0';
+            wordIdx = 0;
+            wordLength = 0;
+
             sen.word_count++;
-        } else if ( *(text + i) == '.') {
+            sen.data = realloc(sen.data, sen.word_count);
+            sen.data[sen.word_count - 1] = w;
+            printf("%s\n", w.data);
+            free(w.data);
+            w.data = (char*)malloc(sizeof(char));
+        }
+
+        if( *(text + i) == '.' ) {
             para.sentence_count++;
-            sen.word_count++;
-        } else if ( *(text + i) == '\n' || strlen(text) == i ) {
+        }
+
+        if ( *(text + i) == '\n' || *(text + i) == NULL ) {
             doc.paragraph_count++;
         }
-    }
 
-    printf("after Doc.paragraph_count : %d\n", doc.paragraph_count);
-    printf("after para.sentence_count : %d\n", para.sentence_count);
-    printf("after sen.word_count : %d\n", sen.word_count);
-
-    for(int i = 0; i <= strlen(text); i++) {
-        printf("%c", *(text + i));
+        if( *(text + i) != ' ' && *(text + i) != '.' && *(text + i ) != '\n' ) {
+            w.data = (char*)realloc(w.data, sizeof(char) * wordLength);
+            w.data[wordIdx] = *(text + i);
+            wordIdx++;
+            wordLength++;
+        }
     }
     printf("\n");
+
+    printf("word_count : %d\n", sen.word_count);
+    printf("sentence_count : %d\n", para.sentence_count);
+    printf("paragraph_count : %d\n", doc.paragraph_count);
 
     return doc;
 }
