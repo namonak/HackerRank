@@ -34,6 +34,8 @@ struct document get_document(char* text) {
 
     w.data = (char*)malloc(sizeof(char) * wordLength);
     sen.data = (struct word*)malloc(sizeof(struct word));
+    para.data = (struct sentence*)malloc(sizeof(struct sentence));
+    doc.data = (struct paragraph*)malloc(sizeof(struct paragraph));
 
     sen.word_count = 0;
     para.sentence_count = 0;
@@ -57,10 +59,22 @@ struct document get_document(char* text) {
 
         if( *(text + i) == '.' ) {
             para.sentence_count++;
+            para.data = (struct sentence*)realloc(para.data, sizeof(struct sentence) * para.sentence_count);
+            memcpy(para.data + (para.sentence_count - 1), &sen, sizeof(struct sentence));
+
+            sen.word_count = 0;
+            free(sen.data);
+            sen.data = (struct word*)malloc(sizeof(struct word));
         }
 
         if ( *(text + i) == '\n' || *(text + i) == '\0' ) {
             doc.paragraph_count++;
+            doc.data = (struct paragraph*)realloc(doc.data, sizeof(struct paragraph) * doc.paragraph_count);
+            memcpy(doc.data + (doc.paragraph_count - 1), &para, sizeof(struct paragraph));
+
+            para.sentence_count = 0;
+            free(para.data);
+            para.data = (struct sentence*)malloc(sizeof(struct sentence));
         }
 
         if( *(text + i) != ' ' && *(text + i) != '.' && *(text + i ) != '\n' ) {
@@ -75,15 +89,15 @@ struct document get_document(char* text) {
 }
 
 struct word kth_word_in_mth_sentence_of_nth_paragraph(struct document Doc, int k, int m, int n) {
-
+    return Doc.data[k].data[m].data[n];
 }
 
 struct sentence kth_sentence_in_mth_paragraph(struct document Doc, int k, int m) {
-
+    return Doc.data[k].data[m];
 }
 
 struct paragraph kth_paragraph(struct document Doc, int k) {
-
+    return Doc.data[k];
 }
 
 
