@@ -92,6 +92,13 @@ struct document get_document(char* text) {
         }
     }
 
+    if(text) free(text);
+    if(w.data) free(w.data);
+    if(sen->data) free(sen->data);
+    if(sen) free(sen);
+    if(para->data) free(para->data);
+    if(para) free(para);
+
     return *doc;
 }
 
