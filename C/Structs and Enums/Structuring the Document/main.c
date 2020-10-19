@@ -24,82 +24,56 @@ struct document {
     int paragraph_count;//denotes number of paragraphs in a document
 };
 struct document get_document(char* text) {
-    struct word w;
-    struct sentence* sen;
-    struct paragraph* para;
-    struct document* doc;
+    struct document doc;
+    struct paragraph* para = NULL;
+    struct sentence* sen = NULL;
+    char* word = NULL;
 
-    int wordIdx = 0;
-    int wordLength = 1;
+    doc.data = NULL;
+    doc.paragraph_count = 0;
 
-    w.data = (char*)malloc(sizeof(char) * wordLength);
-    sen = (struct sentence*)malloc(sizeof(struct sentence*));
-    sen->data = (struct word*)malloc(sizeof(struct word));
-    para = (struct paragraph*)malloc(sizeof(struct paragraph*));
-    para->data = (struct sentence*)malloc(sizeof(struct sentence*));
-    doc = (struct document*)malloc(sizeof(struct document*));
-    doc->data = (struct paragraph*)malloc(sizeof(struct paragraph*));
+    while(*text) {
+        if (*text == ' ' || *text == '.') {
+            if (para == NULL) {
+                doc.paragraph_count++;
+                doc.data = (struct paragraph*)realloc(doc.data, sizeof(struct paragraph) * doc.paragraph_count);
 
-    sen->word_count = 0;
-    para->sentence_count = 0;
-    doc->paragraph_count = 0;
+                para = doc.data + doc.paragraph_count - 1;
+                para->data = NULL;
+                para->sentence_count = 0;
 
-    for (int i = 0; i <= strlen(text); i++) {
-        if( *(text + i) == ' ' || *(text + i) == '.' ) {
-            w.data = (char*)realloc(w.data, sizeof(char) * wordLength);
-            w.data[wordIdx] = '\0';
+                sen = NULL;
+            }
+
+            if (sen == NULL) {
+                para->sentence_count++;
+                para->data = (struct sentence*)realloc(para->data, sizeof(struct sentence) * para->sentence_count);
+
+                sen = para->data + para->sentence_count - 1;
+                sen->data = NULL;
+                sen->word_count = 0;
+            }
 
             sen->word_count++;
             sen->data = (struct word*)realloc(sen->data, sizeof(struct word) * sen->word_count);
-            sen->data[sen->word_count - 1].data = (char*)malloc(sizeof(char) * wordLength);
-            memcpy(sen->data[sen->word_count - 1].data, w.data, wordLength);
+            sen->data[sen->word_count - 1].data = word;
+            word = NULL;
 
-            wordIdx = 0;
-            wordLength = 1;
-            free(w.data);
-            w.data = (char*)malloc(sizeof(char) * wordLength);
+            if (*text == '.') {
+                sen = NULL;
+            }
+            *text = '\0';
+        } else if (*text == '\n') {
+            sen = NULL;
+            para = NULL;
+        } else {
+            if (word == NULL) {
+                word = text;
+            }
         }
-
-        if( *(text + i) == '.' ) {
-            para->sentence_count++;
-            para->data = (struct sentence*)realloc(para->data, sizeof(struct sentence*) * para->sentence_count);
-            memcpy(para->data + (para->sentence_count - 1), sen, sizeof(struct sentence));
-
-            free(sen);
-            free(sen->data);
-            sen = (struct sentence*)malloc(sizeof(struct sentence*));
-            sen->data = (struct word*)malloc(sizeof(struct word));
-            sen->word_count = 0;
-        }
-
-        if ( *(text + i) == '\n' || *(text + i) == '\0' ) {
-            doc->paragraph_count++;
-            doc->data = (struct paragraph*)realloc(doc->data, sizeof(struct paragraph*) * doc->paragraph_count);
-            memcpy(doc->data + (doc->paragraph_count - 1), para, sizeof(struct paragraph));
-
-            free(para);
-            free(para->data);
-            para = (struct paragraph*)malloc(sizeof(struct paragraph*));
-            para->data = (struct sentence*)malloc(sizeof(struct sentence*));
-            para->sentence_count = 0;
-        }
-
-        if( *(text + i) != ' ' && *(text + i) != '.' && *(text + i ) != '\n' ) {
-            w.data = (char*)realloc(w.data, sizeof(char) * wordLength);
-            w.data[wordIdx] = *(text + i);
-            wordIdx++;
-            wordLength++;
-        }
+        text++;
     }
-
-    if(text) free(text);
-    if(w.data) free(w.data);
-    if(sen->data) free(sen->data);
-    if(sen) free(sen);
-    if(para->data) free(para->data);
-    if(para) free(para);
-
-    return *doc;
+    return doc;
 }
 
 struct word kth_word_in_mth_sentence_of_nth_paragraph(struct document Doc, int k, int m, int n) {
