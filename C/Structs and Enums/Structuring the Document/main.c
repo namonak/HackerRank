@@ -77,11 +77,11 @@ struct document get_document(char* text) {
 }
 
 struct word kth_word_in_mth_sentence_of_nth_paragraph(struct document Doc, int k, int m, int n) {
-    return Doc.data[k - 1].data[m - 1].data[n - 1];
+    return Doc.data[n - 1].data[m - 1].data[k - 1];
 }
 
 struct sentence kth_sentence_in_mth_paragraph(struct document Doc, int k, int m) {
-    return Doc.data[k - 1].data[m - 1];
+    return Doc.data[m - 1].data[k - 1];
 }
 
 struct paragraph kth_paragraph(struct document Doc, int k) {
