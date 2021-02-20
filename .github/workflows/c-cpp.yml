@@ -16,4 +16,4 @@ jobs:
     - name: make
       run: cd C/Structs\ and\ Enums/Structuring\ the\ Document/ && gcc -o main.out main.c
     - name: test
-      run: ./main.out < testcase.txt
+      run: ./main.out < testcase.txt > output.txt && diff output.txt expected_output.txt
