@@ -14,6 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2    
     - name: make
-      run: gcc -o main.out main.c
+      run: cd C/Structs\ and\ Enums/Structuring\ the\ Document/ && gcc -o main.out main.c
     - name: test
       run: ./main.out < testcase.txt
