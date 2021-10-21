@@ -50,7 +50,23 @@ int parse_int(char*);
  *
  */
 int* gradingStudents(int grades_count, int* grades, int* result_count) {
+    int* ret = malloc(grades_count * sizeof(int));
 
+    *result_count = grades_count;
+
+    for (int i = 0; i < *result_count; i++) {
+        int res = *(grades + i) % 10;
+
+        if ( (res == 3 || res == 8) && *(grades + i) >= 38) {
+            ret[i] = *(grades + i) + 2;
+        } else if ( (res == 4 || res == 9) && *(grades + i) >= 38) {
+            ret[i] = *(grades + i) + 1;
+        } else {
+            ret[i] = *(grades + i);
+        }
+    }
+
+    return ret;
 }
 
 int main()
