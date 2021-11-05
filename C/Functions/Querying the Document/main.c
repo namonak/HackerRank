@@ -1,24 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
+#include<assert.h>
 #define MAX_CHARACTERS 1005
 #define MAX_PARAGRAPHS 5
 
 char* kth_word_in_mth_sentence_of_nth_paragraph(char**** document, int k, int m, int n) {
-
+    char* word = document[n-1][m-1][k-1];
+    return word;
 }
 
 char** kth_sentence_in_mth_paragraph(char**** document, int k, int m) {
-
+    char** sentence = document[m-1][k-1];
+    return sentence;
 }
 
 char*** kth_paragraph(char**** document, int k) {
-
+    char*** paragraph = document[k-1];
+    return paragraph;
 }
 
 char**** get_document(char* text) {
-
+    char**** document = (char****)malloc(MAX_PARAGRAPHS * sizeof(char***));
+    char* paragraph = strtok(text, "\n");
+    int i = 0;
+    while (paragraph != NULL) {
+        document[i] = (char***)malloc(MAX_PARAGRAPHS * sizeof(char**));
+        char* sentence = strtok(paragraph, ".");
+        int j = 0;
+        while (sentence != NULL) {
+            document[i][j] = (char**)malloc(MAX_CHARACTERS * sizeof(char*));
+            char* word = strtok(sentence, " ");
+            int k = 0;
+            while (word != NULL) {
+                document[i][j][k] = (char*)malloc(MAX_CHARACTERS * sizeof(char));
+                strcpy(document[i][j][k], word);
+                word = strtok(NULL, " ");
+                k++;
+            }
+            sentence = strtok(NULL, ".");
+            j++;
+        }
+        paragraph = strtok(NULL, "\n");
+        i++;
+    }
+    return document;
 }
 
 
