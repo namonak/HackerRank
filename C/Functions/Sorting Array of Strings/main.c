@@ -10,15 +10,35 @@ int lexicographic_sort_reverse(const char* a, const char* b) {
 }
 
 int sort_by_number_of_distinct_characters(const char* a, const char* b) {
-
+    int a_count = 0;
+    int b_count = 0;
+    for (int i = 0; i < strlen(a); i++) {
+        if (a[i] != ' ') {
+            a_count++;
+        }
+    }
+    for (int i = 0; i < strlen(b); i++) {
+        if (b[i] != ' ') {
+            b_count++;
+        }
+    }
+    return a_count - b_count;
 }
 
 int sort_by_length(const char* a, const char* b) {
-
+    return strlen(a) - strlen(b);
 }
 
 void string_sort(char** arr,const int len,int (*cmp_func)(const char* a, const char* b)){
-
+    for (int i = 0; i < len; i++) {
+        for (int j = 0; j < len - 1; j++) {
+            if (cmp_func(arr[j], arr[j + 1]) > 0) {
+                char* temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }
 
 
