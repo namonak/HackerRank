@@ -63,9 +63,22 @@ void send_all_acceptable_packages(town* source, int source_office_index, town* t
 }
 
 town town_with_most_packages(town* towns, int towns_count) {
+    town* max_town = towns;
+    for(int i = 1; i < towns_count; i ++) {
+        if(towns[i].offices_count > max_town -> offices_count) {
+            max_town = towns + i;
+        }
+    }
+    return *max_town;
 }
 
 town* find_town(town* towns, int towns_count, char* name) {
+    for(int i = 0; i < towns_count; i ++) {
+        if(strcmp(towns[i].name, name) == 0) {
+            return towns + i;
+        }
+    }
+    return NULL;
 }
 
 int main()
