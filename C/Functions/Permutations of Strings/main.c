@@ -4,28 +4,20 @@
 
 int next_permutation(int n, char **s)
 {
-    int i, j, k;
+    int i, j;
     char *tmp;
 
-    i = n - 1;
-    while (i > 0 && strcmp(s[i], s[i - 1]) <= 0)
-        i--;
+    for (i = n - 1; i > 0 && strcmp(s[i], s[i - 1]) < 0; i--);
     if (i <= 0)
         return 0;
-    j = n - 1;
-    while (strcmp(s[j], s[i - 1]) <= 0)
-        j--;
+    for (j = n - 1; j >= i && strcmp(s[j], s[i - 1]) < 0; j--);
     tmp = s[i - 1];
     s[i - 1] = s[j];
     s[j] = tmp;
-    k = n - 1;
-    while (i < k)
-    {
+    for (j = n - 1; i < j; i++, j--) {
         tmp = s[i];
-        s[i] = s[k];
-        s[k] = tmp;
-        i++;
-        k--;
+        s[i] = s[j];
+        s[j] = tmp;
     }
     return 1;
 }
